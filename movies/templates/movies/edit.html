@@ -1,0 +1,58 @@
+{% load static %}
+<html>
+    <head>
+        <title>Edit #{{movie.id}} - Movie Database</title>
+        <link rel="stylesheet" href="{% static 'movies/bootstrap-4.1.3/css/bootstrap.min.css' %}" >
+        <script src="{% static 'movies/bootstrap-4.1.3/js/bootstrap.min.js' %}" ></script>
+    </head>
+    
+    <div class="container">
+        <h1>Edit #{{movie.id}} Movie</h1>
+        <form id="edit_form" method="POST" action="{% url 'movies_edit' movie.id %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" value="{{ movie.title }}" />
+            </div>
+            
+            <div class="form-group">
+                <label for="synopsis">Synopsis</label>
+                <textarea name="synopsis" rows="5" class="form-control" >{{ movie.synopsis }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="actors">Actors</label>
+                <input type="text" name="actors" class="form-control" value="{{ movie.actors }}" />    
+            </div>
+
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <input type="text" name="genre" class="form-control" value="{{ movie.genre }}" />    
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration</label>
+                <input type="text" name="duration" class="form-control" value="{{ movie.duration }}" />
+                <small class="form-text text-muted">In minutes</small>
+            </div>
+
+            <div class="form-group">
+                <label for="rate">Rate</label>
+                <input type="text" name="rate" class="form-control" value="{{ movie.rate }}" />
+                <small class="form-text text-muted">From 1 to 5 stars</small>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-secondary" href="{% url 'movies_index' %}"><< Go back to Index</a>
+                </div>
+                <div class="col-md-6" style="text-align: right;">
+                    <button type="submit" class="btn btn-primary">Submit >></button>
+                </div>
+            <div>
+
+        </form>
+    </div>
+
+</html>

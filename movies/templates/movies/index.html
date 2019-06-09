@@ -1,0 +1,51 @@
+{% load static %}
+<html>
+    <head>
+        <title>Index - Movie Database</title>
+        <link rel="stylesheet" href="{% static 'movies/bootstrap-4.1.3/css/bootstrap.min.css' %}" >
+        <script src="{% static 'movies/bootstrap-4.1.3/js/bootstrap.min.js' %}" ></script>
+    </head>
+    <div class="container">
+        <h1>Movie Database</h1>
+
+        {% if 'edit' in message %}
+            <div class="alert alert-success" role="alert">
+                Movie #{{ message_id }} saved with success!
+            </div>
+        {% endif %}
+
+        {% if 'delete' in message %}
+            <div class="alert alert-danger" role="alert">
+                Movie #{{ message_id }} deleted with success!
+            </div>
+        {% endif %}
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>#</th><th>Title</th><th>Genre</th><th>Duration</th><th>Rate</th><th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <th>{{ movie.id }}</th>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.genre }}</td>
+                    <td>{{ movie.duration }} minutes</td>
+                    <td>{{ movie.rate }} stars</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'movies_view' movie.id %}">View</a>
+                        <a class="btn btn-warning" href="{% url 'movies_edit' movie.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'movies_delete' movie.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <p><a class="btn btn-primary" href="{% url 'movies_create' %}">Create New</a></p>
+    </div>
+</html>
