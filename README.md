@@ -4,6 +4,10 @@
 
 This is a CRUD base for Python/Django. It relies only in HTML forms and submits to persist data.
 
+## Demo
+
+![](demo.gif)
+
 ## Installation
 
 Clone repository:
